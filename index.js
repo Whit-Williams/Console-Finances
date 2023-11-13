@@ -88,7 +88,6 @@ var finances = [
 ];
 
 var totalMonths = finances.length;
-
 var profitslosses = 0;
 
 for (var i = 0; i < totalMonths; i++) {
