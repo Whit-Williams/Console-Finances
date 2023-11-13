@@ -87,67 +87,51 @@ var finances = [
   ["Feb-2017", 671099],
 ];
 
-var totalSum = 0;
-
 var totalMonths = finances.length;
-console.log("Total Months: " + totalMonths);
 
-for (var i = 0; i < finances.length; i++) {
-  var netTotal = (totalSum += finances[i][1]);
+var profitslosses = 0;
+
+for (var i = 0; i < totalMonths; i++) {
+  var netTotal = (profitslosses += finances[i][1]);
 }
-console.log("Total: $" + netTotal);
 
 var averageChange = 0;
-var totalAverage = 0;
 var greatestIncrease = ["", 0];
 var greatestDecrease = ["", 0];
 
-for (var i = 0; i < finances.length; i++) {
+for (var i = 0; i < totalMonths; i++) {
   var currentMonth = finances[i][1];
 
   if (i > 0) {
     var previousMonth = finances[i - 1][1];
-    averageChange = currentMonth - previousMonth;
-  }
-  console.log(averageChange);
-
-  if (averageChange > greatestIncrease[1]) {
-    greatestIncrease = [finances[i][0], averageChange];
+    averageChange += currentMonth - previousMonth;
   }
 
-  if (averageChange < greatestDecrease[1]) {
-    greatestDecrease = [finances[i][0], averageChange];
+  var change = currentMonth - previousMonth;
+
+  if (change > greatestIncrease[1]) {
+    greatestIncrease = [finances[i][0], change];
+  }
+
+  if (change < greatestDecrease[1]) {
+    greatestDecrease = [finances[i][0], change];
   }
 }
-console.log(averageChange);
-console.log(
-  "Average Change: " + (averageChange / (totalMonths - 1)).toFixed(2)
-);
-console.log(
-  "Greatest Increase in Profits/Losses: " +
-    greatestIncrease[0] +
-    " ($" +
-    greatestIncrease[1] + ")"
-);
-console.log(
-  "Greatest Decrease in Profits/Losses: " +
-    greatestDecrease[0] +
-    " ($" +
-    greatestDecrease[1] + ")"
-);
+
+var lineBreak = "-----------------";
+console.log("Financial Analysis" + "\n" + lineBreak + "\nTotal Months: " + totalMonths + "\nTotal: $" + netTotal + "\nAverage Change: " + (averageChange / (totalMonths - 1)).toFixed(2) +  "\nGreatest Increase in Profits/Losses: " + greatestIncrease[0] + " ($" + greatestIncrease[1] + ")" +  "\nGreatest Decrease in Profits/Losses: " +
+greatestDecrease[0] + " ($" + greatestDecrease[1] + ")")
 
 
-//to lessen decimal places you use .toFixed(insert the decimal place you want it to stop after i.e. 2 for after the second decimal number)
-// Create variables to hold: total months, total profit, net total of profit loss, average change, greatest increase and greatest decrease
-// Create for loop to look through the array
-// In each iteration you want to increment the months by one using i++ , then + or - the value depending on if it is positive or negative
-// How to specify which value you want to look at within the array, would be variable names [0][1]
-// how to create an array out of logged iterations = var name.push(the var you want it to be stored)
-//you can create more than one loop
-
-//1. Create console.log that will count the total number of months
-//2. Create console.log that will calculate the total amount of profit/losses
+//1. Create variables to hold: total months, profits and losses, net total of profits/losses, average change, change, greatest increase and greatest decrease
+//2. Create console.log that will print the total number of months
+//3. Create console.log that will print the net total of profit/losses
 //3. Calculate the changes in profit/losses between each month
-//4. Use the information from the monthly comparisons to calculate the average
-//5. Use the information from the monthly comparisons to identify the greatest increase
+//4. Use the results of the calculated monthly differences to calculate the average
+//5. Use the monthly differences to identify the greatest increase and decrease
 //6. Track some things whilst we iterate - so we need a loop
+
+
+// How to specify which value you want to look at within the array, would be variable names [0][1]
+
+
